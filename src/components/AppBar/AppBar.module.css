@@ -1,0 +1,19 @@
+.header {
+    background: var(--badges);
+    height: 68px;
+    padding: 24px 0;
+    margin-bottom: 4px;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo {
+    width: 104px;
+    height: 16px;
+}

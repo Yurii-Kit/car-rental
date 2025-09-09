@@ -1,0 +1,11 @@
+.carslist {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 картки в ряд */
+    column-gap: 32px;
+    /* горизонтальний відступ */
+    row-gap: 48px;
+    /* вертикальний відступ */
+    list-style: none;
+    margin: 0;
+}
