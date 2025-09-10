@@ -2,18 +2,29 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { setFilter } from '../../redux/filters/slice';
-import { fetchCars } from '../../redux/cars/operations';
+import { fetchFilteredCars } from '../../redux/cars/operations';
 import { selectFilterState } from '../../redux/filters/selectors';
 import css from './CarsFilterForm.module.css';
 import Select, { components } from 'react-select';
 
-const DropdownIndicator = (props) => (
-  <components.DropdownIndicator {...props}>
-    <svg width="16" height="16">
-      <use xlinkHref="#icon-chevron-down" />
-    </svg>
-  </components.DropdownIndicator>
-);
+const DropdownIndicator = (props) => {
+  const { menuIsOpen } = props.selectProps;
+
+  return (
+    <components.DropdownIndicator {...props}>
+      <svg
+        width="16"
+        height="16"
+        style={{
+          transform: menuIsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+          transition: 'transform 0.2s ease',
+        }}
+      >
+        <use xlinkHref="#icon-chevron-down" />
+      </svg>
+    </components.DropdownIndicator>
+  );
+};
 
 // Custom styles для react-select
 const customStyles = {
@@ -34,20 +45,50 @@ const customStyles = {
     height: '44px',
     boxShadow: 'none',
   }),
+  menu: (provided) => ({
+    ...provided,
+    marginTop: '8px',
+    borderRadius: '12px',
+    backgroundColor: 'var(--white)',
+    boxShadow: '0px 4px 36px rgba(0, 0, 0, 0.02)',
+    overflow: 'hidden',
+    width: '204px',
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    margin: '0px',
+    padding: '14px 18px', // внутрішні відступи списку
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px', // відстань між option'ами
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    padding: '0',
+    fontSize: '16px',
+    lineHeight: '1.25',
+    color: state.isSelected ? 'var(--main)' : 'var(--gray)',
+    backgroundColor: state.isSelected
+      ? 'var(--accent)'
+      : state.isFocused
+      ? 'rgba(0, 113, 227, 0.08)'
+      : '#fff',
+    cursor: 'pointer',
+  }),
   singleValue: (provided) => ({
     ...provided,
     color: 'var(--main)',
   }),
   placeholder: (provided) => ({
     ...provided,
-    color: '#667085',
+    color: 'var(--main)',
   }),
   dropdownIndicator: (provided) => ({
     ...provided,
     color: 'var(--main)',
     padding: 0,
   }),
-  indicatorSeparator: () => ({ display: 'none' }), // прибирає вертикальну лінію
+  indicatorSeparator: () => ({ display: 'none' }),
 };
 
 export default function CarsFilterForm({ brands }) {
@@ -61,8 +102,10 @@ export default function CarsFilterForm({ brands }) {
   });
 
   const handleSubmit = (values) => {
+    console.log(values);
+
     dispatch(setFilter(values));
-    dispatch(fetchCars({ page: 1, limit: 12, filters: values }));
+    dispatch(fetchFilteredCars({ page: 1, limit: 12, ...values }));
   };
 
   return (

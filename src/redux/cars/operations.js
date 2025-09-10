@@ -11,17 +11,20 @@ export const fetchCars = createAsyncThunk(
   },
 );
 
-// export const fetchBrands = createAsyncThunk('cars/fetchBrands', async () => {
-//   const response = await axios.get('/brands');
-//   return response.data; // очікуємо масив брендів
-// });
-
 // Отримати список автомобілів за фільтрами
 export const fetchFilteredCars = createAsyncThunk(
   'filters/fetchFilteredCars',
-  async (filters) => {
-    // filters = { brand, price, mileageFrom, mileageTo, page }
-    const response = await axios.get('/cars', { params: filters });
+  async ({ page = 1, limit = 12, brand, price, mileageFrom, mileageTo }) => {
+    const params = {
+      page,
+      limit,
+      brand: brand || undefined,
+      price: price || undefined,
+      mileageFrom: mileageFrom || undefined,
+      mileageTo: mileageTo || undefined,
+    };
+
+    const response = await axios.get('/cars', { params });
     return response.data;
   },
 );

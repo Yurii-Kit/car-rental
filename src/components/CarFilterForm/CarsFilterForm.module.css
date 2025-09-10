@@ -40,11 +40,12 @@
 }
 
 .formWrapper {
-
     display: flex;
-    width: 320px;
     height: 44px;
+}
 
+.formWrapper input::placeholder {
+    color: var(--main)
 }
 
 .inputFrom {
@@ -56,14 +57,14 @@
     padding: 12px 16px;
     border: none;
     width: 160px;
-    height: 44px;
+
     background: var(--inputs);
     font-weight: 500;
     font-size: 16px;
     line-height: 1.25;
     color: var(--main);
     outline: none;
-    border-right: 1px solid var(--gray-light);
+    border-right: 2px solid var(--gray-light);
     border-radius: 12px 0 0 12px;
 }
 
@@ -76,7 +77,7 @@
     padding: 12px 16px;
     border: none;
     width: 160px;
-    height: 44px;
+
     background: var(--inputs);
     font-weight: 500;
     font-size: 16px;
@@ -119,4 +120,8 @@
     /* line-height: 20px; */
     line-height: 1.25;
     color: var(--white);
+}
+
+.buttons button:hover {
+    background: var(--button-hover);
 }

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCars } from './operations';
+import { fetchCars, fetchFilteredCars } from './operations';
 
 const carsSlice = createSlice({
   name: 'cars',
@@ -31,6 +31,26 @@ const carsSlice = createSlice({
       .addCase(fetchCars.fulfilled, (state, action) => {
         state.isLoading = false;
 
+        const page = Number(action.payload.page);
+        const totalPages = Number(action.payload.totalPages);
+        const totalCars = Number(action.payload.totalCars);
+
+        if (page === 1) {
+          state.list = action.payload.cars;
+        } else {
+          state.list = [...state.list, ...action.payload.cars];
+        }
+
+        state.page = page;
+        state.totalCars = totalCars;
+        state.totalPages = totalPages;
+      })
+      .addCase(fetchFilteredCars.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchFilteredCars.fulfilled, (state, action) => {
+        state.isLoading = false;
         const page = Number(action.payload.page);
         const totalPages = Number(action.payload.totalPages);
         const totalCars = Number(action.payload.totalCars);
