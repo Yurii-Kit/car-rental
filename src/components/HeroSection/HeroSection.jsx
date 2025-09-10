@@ -1,14 +1,10 @@
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import css from './HeroSection.module.css';
-import { fetchCars } from '../../redux/cars/operations';
 
 export default function HeroSection() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = () => {
-    dispatch(fetchCars());
     navigate('/catalog');
   };
 

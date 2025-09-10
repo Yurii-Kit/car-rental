@@ -2,7 +2,7 @@
 .card {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     border-radius: 14px;
     overflow: hidden;
     background-color: var(--white);
@@ -120,4 +120,11 @@
 .favoriteBtn:hover svg {
     color: var(--button-hover);
     transform: scale(1.1);
+}
+
+.favoriteBtn.active svg {
+    fill: red;
+    /* заповнене серце */
+    stroke: red;
+    color: brown;
 }

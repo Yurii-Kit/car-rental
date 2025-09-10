@@ -20,3 +20,8 @@ export const selectFilters = createSelector(
   [selectCarsState],
   (carsState) => carsState.filters || {},
 );
+export const selectPageState = (state) => state.cars.page;
+
+export const selectTotalPagesState = (state) => state.cars.totalPages;
+
+export const selectIsLoadingState = (state) => state.cars.isLoading;

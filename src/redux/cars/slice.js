@@ -7,14 +7,13 @@ const carsSlice = createSlice({
     list: [], // список машин
     favorites: [], // обрані авто
     filters: {}, // стан фільтрів
+    totalCars: null, // загальна кількість авто
+    page: 1, // поточна сторінка
+    totalPages: null, // всього сторінок
     isLoading: false,
     error: null,
   },
   reducers: {
-    setFilters(state, action) {
-      state.filters = action.payload;
-      state.list = []; // Скидаємо попередні результати перед новим пошуком
-    },
     addFavorite(state, action) {
       if (!state.favorites.includes(action.payload)) {
         state.favorites.push(action.payload);
@@ -22,9 +21,6 @@ const carsSlice = createSlice({
     },
     removeFavorite(state, action) {
       state.favorites = state.favorites.filter((id) => id !== action.payload);
-    },
-    clearFavorites(state) {
-      state.favorites = [];
     },
   },
   extraReducers: (builder) => {
@@ -35,16 +31,24 @@ const carsSlice = createSlice({
       })
       .addCase(fetchCars.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.list = action.payload.cars;
-      })
-      .addCase(fetchCars.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
+
+        const page = Number(action.payload.page);
+        const totalPages = Number(action.payload.totalPages);
+        const totalCars = Number(action.payload.totalCars);
+
+        if (page === 1) {
+          state.list = action.payload.cars;
+        } else {
+          state.list = [...state.list, ...action.payload.cars];
+        }
+
+        state.page = page;
+        state.totalCars = totalCars;
+        state.totalPages = totalPages;
       });
   },
 });
 
-export const { setFilters, addFavorite, removeFavorite, clearFavorites } =
-  carsSlice.actions;
+export const { addFavorite, removeFavorite } = carsSlice.actions;
 
 export default carsSlice.reducer;
