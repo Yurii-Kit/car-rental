@@ -10,7 +10,7 @@ export default function CarCard({ car }) {
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
   const isFavorite = favorites.includes(car.id);
-  if (!car) return null;
+  // if (!car) return null;
 
   const handleFavorite = () => {
     if (isFavorite) {

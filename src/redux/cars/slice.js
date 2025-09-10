@@ -6,7 +6,6 @@ const carsSlice = createSlice({
   initialState: {
     list: [], // список машин
     favorites: [], // обрані авто
-    filters: {}, // стан фільтрів
     totalCars: null, // загальна кількість авто
     page: 1, // поточна сторінка
     totalPages: null, // всього сторінок

@@ -16,10 +16,6 @@ export const selectFavorites = createSelector(
   (carsState) => carsState.favorites || [],
 );
 
-export const selectFilters = createSelector(
-  [selectCarsState],
-  (carsState) => carsState.filters || {},
-);
 export const selectPageState = (state) => state.cars.page;
 
 export const selectTotalPagesState = (state) => state.cars.totalPages;

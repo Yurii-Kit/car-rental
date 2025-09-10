@@ -1,0 +1,122 @@
+/* CarsFilterForm.module.css */
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    /* щоб ряд переносився на менших екранах */
+    gap: 16px;
+    /* відстань між полями */
+    align-items: end;
+    justify-content: center;
+    margin-top: 80px;
+    margin-bottom: 54px;
+
+}
+
+.fieldGroup {
+    display: flex;
+    flex-direction: column;
+
+    width: 204px;
+    height: 68px;
+
+}
+
+.fieldDouble {
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.label {
+    font-weight: 400;
+    font-size: 12px;
+
+    /* line-height: 16px; */
+    line-height: 1.33333;
+    color: var(--gray);
+    margin-bottom: 8px;
+}
+
+.formWrapper {
+
+    display: flex;
+    width: 320px;
+    height: 44px;
+
+}
+
+.inputFrom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 32px;
+    padding: 12px 16px;
+    border: none;
+    width: 160px;
+    height: 44px;
+    background: var(--inputs);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--main);
+    outline: none;
+    border-right: 1px solid var(--gray-light);
+    border-radius: 12px 0 0 12px;
+}
+
+.inputTo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 32px;
+    padding: 12px 16px;
+    border: none;
+    width: 160px;
+    height: 44px;
+    background: var(--inputs);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--main);
+    outline: none;
+    border-radius: 0 12px 12px 0;
+
+}
+
+
+
+
+
+
+
+.buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 0px;
+
+    border-radius: 12px;
+    padding-block: 12px;
+    padding-inline: 51px;
+    width: 156px;
+    height: 44px;
+
+    background: var(--button);
+
+    font-weight: 600;
+    font-size: 16px;
+
+    /* line-height: 20px; */
+    line-height: 1.25;
+    color: var(--white);
+}
