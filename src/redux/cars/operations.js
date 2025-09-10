@@ -14,14 +14,21 @@ export const fetchCars = createAsyncThunk(
 // Отримати список автомобілів за фільтрами
 export const fetchFilteredCars = createAsyncThunk(
   'filters/fetchFilteredCars',
-  async ({ page = 1, limit = 12, brand, price, mileageFrom, mileageTo }) => {
+  async ({
+    page = 1,
+    limit = 12,
+    brand,
+    rentalPrice,
+    minMileage,
+    maxMileage,
+  }) => {
     const params = {
       page,
       limit,
       brand: brand || undefined,
-      price: price || undefined,
-      mileageFrom: mileageFrom || undefined,
-      mileageTo: mileageTo || undefined,
+      rentalPrice: rentalPrice || undefined,
+      minMileage: minMileage || undefined,
+      maxMileage: maxMileage || undefined,
     };
 
     const response = await axios.get('/cars', { params });

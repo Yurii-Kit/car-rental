@@ -3,7 +3,7 @@ import { createSelector } from '@reduxjs/toolkit';
 
 // Безпечний селектор
 export const selectCarsState = (state) =>
-  state.cars || { list: [], favorites: [], filters: {} };
+  state.cars || { list: [], favorites: [] };
 
 // Мемоізовані селектори
 export const selectCarsList = createSelector(

@@ -1,6 +1,6 @@
 // CatalogPage.jsx
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCars } from '../../redux/cars/operations';
+import { fetchCars, fetchFilteredCars } from '../../redux/cars/operations';
 import {
   selectCarsList,
   selectPageState,
@@ -13,7 +13,7 @@ import css from './CatalogPage.module.css';
 import { useEffect } from 'react';
 import CarsFilterForm from '../../components/CarFilterForm/CarsFilterForm';
 import { fetchBrands } from '../../redux/filters/operations';
-import { selectBrands } from '../../redux/filters/selectors';
+import { selectBrands, selectFilterState } from '../../redux/filters/selectors';
 
 export default function CatalogPage() {
   const dispatch = useDispatch();
@@ -22,16 +22,28 @@ export default function CatalogPage() {
   const totalPages = useSelector(selectTotalPagesState);
   const isLoading = useSelector(selectIsLoadingState);
   const brands = useSelector(selectBrands);
+  const filters = useSelector(selectFilterState);
 
-  // При монтуванні завантажуємо першу сторінку
+  // Підвантажуємо бренди та першу сторінку з фільтрами
   useEffect(() => {
     dispatch(fetchBrands());
-    dispatch(fetchCars({ page: 1, limit: 12 }));
+    dispatch(
+      fetchCars({
+        page: 1,
+        limit: 12,
+      }),
+    );
   }, [dispatch]);
 
   const handleLoadMore = () => {
     if (page < totalPages) {
-      dispatch(fetchCars({ page: page + 1, limit: 12 }));
+      dispatch(
+        fetchFilteredCars({
+          page: page + 1,
+          limit: 12,
+          ...filters.filters, // тут лежать brand, rentalPrice, minMileage, maxMileage
+        }),
+      );
     }
   };
 

@@ -113,9 +113,9 @@ export default function CarsFilterForm({ brands }) {
       enableReinitialize
       initialValues={{
         brand: filters.brand || '',
-        price: filters.price || '',
-        mileageFrom: filters.mileageFrom || '',
-        mileageTo: filters.mileageTo || '',
+        rentalPrice: filters.rentalPrice || '',
+        minMileage: filters.minMileage || '',
+        maxMileage: filters.maxMileage || '',
       }}
       onSubmit={handleSubmit}
     >
@@ -140,9 +140,13 @@ export default function CarsFilterForm({ brands }) {
             <label className={css.label}>Price/1hour</label>
             <Select
               options={priceOptions}
-              value={priceOptions.find((o) => o.value === values.price) || null}
+              value={
+                priceOptions.find(
+                  (o) => String(o.value) === String(values.rentalPrice),
+                ) || null
+              }
               onChange={(option) =>
-                setFieldValue('price', option ? option.value : '')
+                setFieldValue('rentalPrice', option ? String(option.value) : '')
               }
               components={{ DropdownIndicator }}
               isClearable
@@ -156,19 +160,19 @@ export default function CarsFilterForm({ brands }) {
               <input
                 className={css.inputFrom}
                 type="number"
-                name="mileageFrom"
+                name="minMileage"
                 placeholder="From"
-                value={values.mileageFrom}
-                onChange={(e) => setFieldValue('mileageFrom', e.target.value)}
+                value={values.minMileage}
+                onChange={(e) => setFieldValue('minMileage', e.target.value)}
                 aria-label="Mileage from"
               />
               <input
                 className={css.inputTo}
                 type="number"
-                name="mileageTo"
+                name="maxMileage"
                 placeholder="To"
-                value={values.mileageTo}
-                onChange={(e) => setFieldValue('mileageTo', e.target.value)}
+                value={values.maxMileage}
+                onChange={(e) => setFieldValue('maxMileage', e.target.value)}
                 aria-label="Mileage to"
               />
             </div>

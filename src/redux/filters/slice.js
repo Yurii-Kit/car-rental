@@ -7,9 +7,9 @@ const filterSlice = createSlice({
     brands: [],
     filters: {
       brand: '',
-      price: null,
-      mileageFrom: null,
-      mileageTo: null,
+      rentalPrice: null,
+      minMileage: null,
+      maxMileage: null,
     },
   },
   reducers: {
@@ -19,9 +19,9 @@ const filterSlice = createSlice({
     resetFilters(state) {
       state.filters = {
         brand: '',
-        price: null,
-        mileageFrom: null,
-        mileageTo: null,
+        rentalPrice: null,
+        minMileage: null,
+        maxMileage: null,
       };
     },
   },
