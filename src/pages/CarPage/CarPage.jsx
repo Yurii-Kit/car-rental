@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import Container from '../../components/Container/Container';
 import { fetchCarById } from '../../redux/cars/operations';
 import {
@@ -54,6 +56,18 @@ export default function CarPage() {
     : '';
   const formatMileage = (mileage) => mileage.toLocaleString() + ' km';
 
+  // Formik
+  const initialValues = { name: '', email: '', date: '', comment: '' };
+  const validationSchema = Yup.object({
+    name: Yup.string().required('Name is required'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    date: Yup.date().nullable(),
+  });
+  const handleSubmit = (values, { resetForm }) => {
+    console.log('Booking data:', values);
+    resetForm();
+  };
+
   return (
     <Container>
       <div className={css.carPage}>
@@ -67,21 +81,63 @@ export default function CarPage() {
 
           <aside className={css.carPage__booking}>
             <h2>Book your car now</h2>
-            <form>
-              <label>
-                Name*
-                <input type="text" name="name" required />
-              </label>
-              <label>
-                Email*
-                <input type="email" name="email" required />
-              </label>
-              <label>
-                Booking date
-                <input type="date" name="date" />
-              </label>
-              <button type="submit">Send</button>
-            </form>
+            <p>Stay connected! We are always ready to help you.</p>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}
+            >
+              <Form className={css.form}>
+                <div className={css.formField}>
+                  <Field
+                    type="text"
+                    name="name"
+                    className={css.inputField}
+                    placeholder="Name*"
+                  />
+                  <ErrorMessage
+                    name="name"
+                    component="div"
+                    className={css.errorMessage}
+                  />
+                </div>
+
+                <div className={css.formField}>
+                  <Field
+                    type="email"
+                    name="email"
+                    className={css.inputField}
+                    placeholder="Email*"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className={css.errorMessage}
+                  />
+                </div>
+
+                <div className={css.formField}>
+                  <Field
+                    type="text"
+                    name="date"
+                    className={css.inputField}
+                    placeholder="Booking date"
+                  />
+                </div>
+                <div className={css.formField}>
+                  <Field
+                    as="textarea"
+                    name="comment"
+                    className={css.inputField}
+                    placeholder="Comment"
+                  />
+                </div>
+
+                <button type="submit" className={css.formBtn}>
+                  Send
+                </button>
+              </Form>
+            </Formik>
           </aside>
         </div>
 
@@ -158,7 +214,7 @@ export default function CarPage() {
 
             <div className={css.carPage_section}>
               <h3>Accessories and functionalities:</h3>
-              <ul className={css.accessoriesList}>
+              <ul>
                 <li>
                   <svg width="16" height="16" aria-hidden="true">
                     <use href="#icon-check-circle" />
