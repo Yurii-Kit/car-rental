@@ -21,3 +21,7 @@ export const selectPageState = (state) => state.cars.page;
 export const selectTotalPagesState = (state) => state.cars.totalPages;
 
 export const selectIsLoadingState = (state) => state.cars.isLoading;
+
+export const selectIsSelectedCarState = (state) => state.cars.selectedCar;
+
+export const selectErrorState = (state) => state.cars.error;

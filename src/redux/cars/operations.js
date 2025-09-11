@@ -35,3 +35,10 @@ export const fetchFilteredCars = createAsyncThunk(
     return response.data;
   },
 );
+export const fetchCarById = createAsyncThunk(
+  'cars/fetchCarById',
+  async ({ carId }) => {
+    const response = await axios.get(`/cars/${carId}`);
+    return response.data;
+  },
+);

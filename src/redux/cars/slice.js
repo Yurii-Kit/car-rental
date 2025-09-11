@@ -1,11 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCars, fetchFilteredCars } from './operations';
+import { fetchCars, fetchFilteredCars, fetchCarById } from './operations';
+
+const initialFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 const carsSlice = createSlice({
   name: 'cars',
   initialState: {
     list: [], // список машин
-    favorites: [], // обрані авто
+    selectedCar: null, //вибране авто
+    favorites: initialFavorites, // обрані авто
     totalCars: null, // загальна кількість авто
     page: 1, // поточна сторінка
     totalPages: null, // всього сторінок
@@ -45,6 +48,10 @@ const carsSlice = createSlice({
         state.totalCars = totalCars;
         state.totalPages = totalPages;
       })
+      .addCase(fetchCars.rejected, (state) => {
+        state.error = true;
+      })
+
       .addCase(fetchFilteredCars.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -64,6 +71,22 @@ const carsSlice = createSlice({
         state.page = page;
         state.totalCars = totalCars;
         state.totalPages = totalPages;
+      })
+      .addCase(fetchFilteredCars.rejected, (state) => {
+        state.error = true;
+      })
+
+      .addCase(fetchCarById.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+        state.selectedCar = null;
+      })
+      .addCase(fetchCarById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.selectedCar = action.payload;
+      })
+      .addCase(fetchCarById.rejected, (state) => {
+        state.error = true;
       });
   },
 });

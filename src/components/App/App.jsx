@@ -20,7 +20,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/catalog" element={<CatalogPage />} />
-            <Route path="/catalog/:id" element={<CarPage />} />
+            <Route path="/catalog/:carId" element={<CarPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

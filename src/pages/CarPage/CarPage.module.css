@@ -1,0 +1,142 @@
+.carPage {
+    padding-top: 84px;
+    padding-bottom: 110px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* ліва + права колонка */
+    gap: 72px;
+    align-items: start;
+}
+
+/* ліва колонка */
+.leftCol {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.carPage_image {
+    border-radius: 19px;
+    width: 640px;
+    height: 512px;
+    object-fit: cover;
+}
+
+.carPage__booking {
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+/* права колонка */
+.carPage_info {
+    display: flex;
+    flex-direction: column;
+    gap: 68px;
+    width: 488px;
+    ;
+}
+
+.carPage_title h2 {
+    margin: 0;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.33333;
+    color: var(--main);
+}
+
+.carPage_title span {
+    padding-left: 16px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--gray);
+}
+
+.carPage_location {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+    font-size: 16px;
+    /* line-height: 20px; */
+    line-height: 1.25;
+    color: var(--main);
+    margin-bottom: 16px;
+}
+
+
+.carPage_location span {
+    padding-left: 12px;
+    color: var(--main);
+}
+
+.carPage_price {
+    font-weight: 600;
+    font-size: 24px;
+    /* line-height: 32px; */
+    line-height: 1.33333;
+    color: var(--button);
+    margin-bottom: 32px;
+}
+
+.carPage_description {
+    font-weight: 500;
+    font-size: 16px;
+    /* line-height: 20px; */
+    line-height: 1.25;
+    color: var(--main);
+}
+
+
+
+
+.carPage_details {
+    display: flex;
+    flex-direction: column;
+    gap: 110px;
+}
+
+.carPage_section h3 {
+    margin: 0;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--main);
+}
+
+.carPage_section ul {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.carPage_section li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--main);
+}
+
+.carPage_section .svg {
+    display: block;
+    padding-right: 8px;
+}
+
+.accessoriesList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding-left: 20px;
+}

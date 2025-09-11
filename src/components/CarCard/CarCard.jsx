@@ -9,8 +9,8 @@ import { addFavorite, removeFavorite } from '../../redux/cars/slice';
 export default function CarCard({ car }) {
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
+  if (!car) return null;
   const isFavorite = favorites.includes(car.id);
-  // if (!car) return null;
 
   const handleFavorite = () => {
     if (isFavorite) {

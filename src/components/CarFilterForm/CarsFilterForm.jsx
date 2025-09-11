@@ -101,11 +101,12 @@ export default function CarsFilterForm({ brands }) {
     return { value, label: `${value}` };
   });
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, action) => {
     console.log(values);
 
     dispatch(setFilter(values));
     dispatch(fetchFilteredCars({ page: 1, limit: 12, ...values }));
+    action.resetForm();
   };
 
   return (

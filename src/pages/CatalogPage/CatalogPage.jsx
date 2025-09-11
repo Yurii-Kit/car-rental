@@ -35,13 +35,23 @@ export default function CatalogPage() {
     );
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   if (!brands || brands.length === 0) {
+  //     dispatch(fetchBrands());
+  //   }
+
+  //   if (!cars || cars.length === 0 || page !== 1) {
+  //     dispatch(fetchCars({ page: 1, limit: 12 }));
+  //   }
+  // }, [dispatch, brands, cars, page]);
+
   const handleLoadMore = () => {
     if (page < totalPages) {
       dispatch(
         fetchFilteredCars({
           page: page + 1,
           limit: 12,
-          ...filters.filters, // тут лежать brand, rentalPrice, minMileage, maxMileage
+          ...filters, // тут лежать brand, rentalPrice, minMileage, maxMileage
         }),
       );
     }
@@ -59,7 +69,7 @@ export default function CatalogPage() {
         >
           {isLoading ? 'Loading...' : 'Load More'}
         </button>
-      )}{' '}
+      )}
     </Container>
   );
 }
