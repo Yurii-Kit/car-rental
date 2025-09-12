@@ -1,8 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import Container from '../../components/Container/Container';
 import { fetchCarById } from '../../redux/cars/operations';
 import {
@@ -11,6 +9,7 @@ import {
   selectErrorState,
 } from '../../redux/cars/selectors';
 import css from './CarPage.module.css';
+import OrderForm from '../../components/OrdreForm/OrderForm';
 
 export default function CarPage() {
   const dispatch = useDispatch();
@@ -49,23 +48,15 @@ export default function CarPage() {
     );
   }
 
-  // Тепер car гарантовано є
+  //Тепер car гарантовано є
   const shortId = carId.slice(-4);
   const location = car.address
     ? car.address.split(', ').slice(-2).join(', ')
     : '';
   const formatMileage = (mileage) => mileage.toLocaleString() + ' km';
 
-  // Formik
-  const initialValues = { name: '', email: '', date: '', comment: '' };
-  const validationSchema = Yup.object({
-    name: Yup.string().required('Name is required'),
-    email: Yup.string().email('Invalid email').required('Email is required'),
-    date: Yup.date().nullable(),
-  });
-  const handleSubmit = (values, { resetForm }) => {
-    console.log('Booking data:', values);
-    resetForm();
+  const handleSubmit = (newValues) => {
+    console.log('Booking:', newValues);
   };
 
   return (
@@ -80,64 +71,11 @@ export default function CarPage() {
           />
 
           <aside className={css.carPage__booking}>
-            <h2>Book your car now</h2>
-            <p>Stay connected! We are always ready to help you.</p>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
-            >
-              <Form className={css.form}>
-                <div className={css.formField}>
-                  <Field
-                    type="text"
-                    name="name"
-                    className={css.inputField}
-                    placeholder="Name*"
-                  />
-                  <ErrorMessage
-                    name="name"
-                    component="div"
-                    className={css.errorMessage}
-                  />
-                </div>
-
-                <div className={css.formField}>
-                  <Field
-                    type="email"
-                    name="email"
-                    className={css.inputField}
-                    placeholder="Email*"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className={css.errorMessage}
-                  />
-                </div>
-
-                <div className={css.formField}>
-                  <Field
-                    type="text"
-                    name="date"
-                    className={css.inputField}
-                    placeholder="Booking date"
-                  />
-                </div>
-                <div className={css.formField}>
-                  <Field
-                    as="textarea"
-                    name="comment"
-                    className={css.inputField}
-                    placeholder="Comment"
-                  />
-                </div>
-
-                <button type="submit" className={css.formBtn}>
-                  Send
-                </button>
-              </Form>
-            </Formik>
+            <div className={css.titleForm}>
+              <h2>Book your car now</h2>
+              <p>Stay connected! We are always ready to help you.</p>
+            </div>
+            <OrderForm onSubmit={handleSubmit} />
           </aside>
         </div>
 
