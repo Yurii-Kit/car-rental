@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from '../Layout/Layout';
+import { Toaster } from 'react-hot-toast';
 
 import SvgSprite from '../SvgSprite/SvgSprite';
 
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <>
       <SvgSprite /> {/* ✅ один раз у DOM */}
+      <Toaster />
       <Layout>
         <Suspense fallback={null}>
           <Routes>
