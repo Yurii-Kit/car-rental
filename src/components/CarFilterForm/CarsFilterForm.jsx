@@ -1,6 +1,6 @@
 // CarsFilterForm.jsx
 import { useDispatch, useSelector } from 'react-redux';
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { setFilter } from '../../redux/filters/slice';
 import { fetchFilteredCars } from '../../redux/cars/operations';
 import { selectFilterState } from '../../redux/filters/selectors';
@@ -33,12 +33,12 @@ const customStyles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '32px',
+    // gap: '32px',
     paddingRight: '16px',
     borderRadius: '12px',
     border: 'none',
     background: 'var(--inputs)',
-    fontWeight: 500,
+    fontWeight: '500',
     fontSize: '16px',
     lineHeight: '1.25',
     color: 'var(--main)',
@@ -158,24 +158,27 @@ export default function CarsFilterForm({ brands }) {
           <div className={css.fieldDouble}>
             <label className={css.label}>Car mileage / km</label>
             <div className={css.formWrapper}>
-              <input
-                className={css.inputFrom}
-                type="number"
-                name="minMileage"
-                placeholder="From"
-                value={values.minMileage}
-                onChange={(e) => setFieldValue('minMileage', e.target.value)}
-                aria-label="Mileage from"
-              />
-              <input
-                className={css.inputTo}
-                type="number"
-                name="maxMileage"
-                placeholder="To"
-                value={values.maxMileage}
-                onChange={(e) => setFieldValue('maxMileage', e.target.value)}
-                aria-label="Mileage to"
-              />
+              <div className={css.inputWrapper}>
+                <Field
+                  className={css.inputFrom}
+                  type="number"
+                  name="minMileage"
+                  value={values.minMileage}
+                  onChange={(e) => setFieldValue('minMileage', e.target.value)}
+                  aria-label="Mileage from"
+                />
+              </div>
+
+              <div className={css.inputWrapper}>
+                <Field
+                  className={css.inputTo}
+                  type="number"
+                  name="maxMileage"
+                  value={values.maxMileage}
+                  onChange={(e) => setFieldValue('maxMileage', e.target.value)}
+                  aria-label="Mileage to"
+                />
+              </div>
             </div>
           </div>
 
