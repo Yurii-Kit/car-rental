@@ -108,23 +108,23 @@
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease;
-
 }
 
 .favoriteBtn svg {
     width: 16px;
     height: 16px;
-    color: var(--badges);
+    stroke: var(--badges);
+    stroke-width: 2;
     fill: none;
 }
 
 .favoriteBtn:hover svg {
-    fill: var(--button-hover);
+    stroke: var(--button-hover);
     transform: scale(1.15);
 
 }
 
 .favoriteBtn.active svg {
-    color: var(--button-hover);
-    fill: var(--button-hover);
+    stroke: var(--button);
+    fill: var(--button);
 }

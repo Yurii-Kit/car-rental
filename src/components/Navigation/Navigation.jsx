@@ -16,7 +16,7 @@ export default function Navigation() {
           </NavLink>
         </li>
         <li className={css.navItem}>
-          <NavLink to="/catalog" className={getActiveLinkClass}>
+          <NavLink to="/catalog" end className={getActiveLinkClass}>
             Catalog
           </NavLink>
         </li>

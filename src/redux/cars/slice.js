@@ -49,7 +49,8 @@ const carsSlice = createSlice({
         state.totalPages = totalPages;
       })
       .addCase(fetchCars.rejected, (state) => {
-        state.error = true;
+        state.isLoading = false;
+        state.state.error = true;
       })
 
       .addCase(fetchFilteredCars.pending, (state) => {
@@ -73,6 +74,7 @@ const carsSlice = createSlice({
         state.totalPages = totalPages;
       })
       .addCase(fetchFilteredCars.rejected, (state) => {
+        state.isLoading = false;
         state.error = true;
       })
 
@@ -86,6 +88,7 @@ const carsSlice = createSlice({
         state.selectedCar = action.payload;
       })
       .addCase(fetchCarById.rejected, (state) => {
+        state.isLoading = false;
         state.error = true;
       });
   },

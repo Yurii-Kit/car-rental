@@ -6,6 +6,7 @@ import {
   selectPageState,
   selectTotalPagesState,
   selectIsLoadingState,
+  selectErrorState,
 } from '../../redux/cars/selectors';
 import Container from '../../components/Container/Container';
 import CarsList from '../../components/CarsList/CarsList';
@@ -23,27 +24,22 @@ export default function CatalogPage() {
   const isLoading = useSelector(selectIsLoadingState);
   const brands = useSelector(selectBrands);
   const filters = useSelector(selectFilterState);
+  const error = useSelector(selectErrorState);
 
-  // Підвантажуємо бренди та першу сторінку з фільтрами
   useEffect(() => {
-    dispatch(fetchBrands());
-    dispatch(
-      fetchCars({
-        page: 1,
-        limit: 12,
-      }),
-    );
-  }, [dispatch]);
+    if (!brands.length) {
+      dispatch(fetchBrands());
+    }
 
-  // useEffect(() => {
-  //   if (!brands || brands.length === 0) {
-  //     dispatch(fetchBrands());
-  //   }
-
-  //   if (!cars || cars.length === 0 || page !== 1) {
-  //     dispatch(fetchCars({ page: 1, limit: 12 }));
-  //   }
-  // }, [dispatch, brands, cars, page]);
+    if (!cars.length) {
+      dispatch(
+        fetchCars({
+          page: 1,
+          limit: 12,
+        }),
+      );
+    }
+  }, [dispatch, cars.length, brands.length]);
 
   const handleLoadMore = () => {
     if (page < totalPages) {
@@ -56,6 +52,22 @@ export default function CatalogPage() {
       );
     }
   };
+
+  if (isLoading) {
+    return (
+      <Container>
+        <p>Loading car list...</p>
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container>
+        <p>Something went wrong 😢</p>
+      </Container>
+    );
+  }
 
   return (
     <Container className={css.container}>

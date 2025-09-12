@@ -61,7 +61,7 @@ export default function CarCard({ car }) {
         onClick={handleFavorite}
       >
         <svg width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-heart" />
+          <use href="#icon-heart_full" />
         </svg>
       </button>
     </div>
