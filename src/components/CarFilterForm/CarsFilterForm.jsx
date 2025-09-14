@@ -29,6 +29,16 @@ const DropdownIndicator = (props) => {
   );
 };
 
+// Хелпери для форматування
+const formatNumber = (value) => {
+  if (!value) return '';
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
+const parseNumber = (value) => {
+  return value.replace(/,/g, ''); // забираємо коми перед збереженням
+};
+
 export default function CarsFilterForm({ brands }) {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilterState);
@@ -42,7 +52,6 @@ export default function CarsFilterForm({ brands }) {
 
   const handleSubmit = (values, action) => {
     console.log(values);
-
     dispatch(setFilter(values));
     dispatch(fetchFilteredCars({ page: 1, limit: 12, ...values }));
     action.resetForm();
@@ -106,26 +115,40 @@ export default function CarsFilterForm({ brands }) {
             </label>
             <div className={css.formWrapper}>
               <div className={css.inputWrapper}>
-                <Field
-                  id={`${fieldId}-minMileage`}
-                  className={css.inputFrom}
-                  type="number"
-                  name="minMileage"
-                  value={values.minMileage}
-                  onChange={(e) => setFieldValue('minMileage', e.target.value)}
-                  aria-label="Mileage from"
-                />
+                <Field name="minMileage">
+                  {({ field, form }) => (
+                    <input
+                      {...field}
+                      id={`${fieldId}-minMileage`}
+                      className={css.inputFrom}
+                      type="text"
+                      value={formatNumber(field.value)}
+                      onChange={(e) => {
+                        const rawValue = parseNumber(e.target.value);
+                        form.setFieldValue('minMileage', rawValue);
+                      }}
+                      aria-label="Mileage from"
+                    />
+                  )}
+                </Field>
               </div>
 
               <div className={css.inputWrapper}>
-                <Field
-                  className={css.inputTo}
-                  type="number"
-                  name="maxMileage"
-                  value={values.maxMileage}
-                  onChange={(e) => setFieldValue('maxMileage', e.target.value)}
-                  aria-label="Mileage to"
-                />
+                <Field name="maxMileage">
+                  {({ field, form }) => (
+                    <input
+                      {...field}
+                      className={css.inputTo}
+                      type="text"
+                      value={formatNumber(field.value)}
+                      onChange={(e) => {
+                        const rawValue = parseNumber(e.target.value);
+                        form.setFieldValue('maxMileage', rawValue);
+                      }}
+                      aria-label="Mileage to"
+                    />
+                  )}
+                </Field>
               </div>
             </div>
           </div>
