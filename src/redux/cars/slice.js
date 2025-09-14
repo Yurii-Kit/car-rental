@@ -29,6 +29,7 @@ const carsSlice = createSlice({
     builder
       .addCase(fetchCars.pending, (state) => {
         state.isLoading = true;
+
         state.error = null;
       })
       .addCase(fetchCars.fulfilled, (state, action) => {
@@ -81,7 +82,6 @@ const carsSlice = createSlice({
       .addCase(fetchCarById.pending, (state) => {
         state.isLoading = true;
         state.error = null;
-        state.selectedCar = null;
       })
       .addCase(fetchCarById.fulfilled, (state, action) => {
         state.isLoading = false;

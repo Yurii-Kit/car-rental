@@ -20,10 +20,10 @@ export default function CarPage() {
   const error = useSelector(selectErrorState);
 
   useEffect(() => {
-    if (carId) {
+    if (!car || car.id !== carId) {
       dispatch(fetchCarById({ carId }));
     }
-  }, [dispatch, carId]);
+  }, [dispatch, carId, car]);
 
   if (isLoading) {
     return (
