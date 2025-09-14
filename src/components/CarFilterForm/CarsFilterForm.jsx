@@ -6,6 +6,8 @@ import { fetchFilteredCars } from '../../redux/cars/operations';
 import { selectFilterState } from '../../redux/filters/selectors';
 import css from './CarsFilterForm.module.css';
 import Select, { components } from 'react-select';
+import clsx from 'clsx';
+import { useId } from 'react';
 
 const DropdownIndicator = (props) => {
   const { menuIsOpen } = props.selectProps;
@@ -94,6 +96,7 @@ const customStyles = {
 export default function CarsFilterForm({ brands }) {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilterState);
+  const fieldId = useId();
 
   const brandOptions = (brands || []).map((b) => ({ value: b, label: b }));
   const priceOptions = Array.from({ length: 10 }, (_, i) => {
@@ -123,8 +126,11 @@ export default function CarsFilterForm({ brands }) {
       {({ values, setFieldValue }) => (
         <Form className={css.form}>
           <div className={css.fieldGroup}>
-            <label className={css.label}>Car brand</label>
+            <label className={css.label} htmlFor={`${fieldId}-brand`}>
+              Car brand
+            </label>
             <Select
+              inputId={`${fieldId}-brand`}
               options={brandOptions}
               value={brandOptions.find((o) => o.value === values.brand) || null}
               onChange={(option) =>
@@ -137,9 +143,12 @@ export default function CarsFilterForm({ brands }) {
             />
           </div>
 
-          <div className={css.fieldGroup}>
-            <label className={css.label}>Price/1hour</label>
+          <div className={clsx(css.fieldGroup, css.fieldGroup2)}>
+            <label className={css.label} htmlFor={`${fieldId}-price`}>
+              Price/1hour
+            </label>
             <Select
+              inputId={`${fieldId}-price`}
               options={priceOptions}
               value={
                 priceOptions.find(
@@ -156,10 +165,13 @@ export default function CarsFilterForm({ brands }) {
             />
           </div>
           <div className={css.fieldDouble}>
-            <label className={css.label}>Car mileage / km</label>
+            <label className={css.label} htmlFor={`${fieldId}-minMileage`}>
+              Car mileage / km
+            </label>
             <div className={css.formWrapper}>
               <div className={css.inputWrapper}>
                 <Field
+                  id={`${fieldId}-minMileage`}
                   className={css.inputFrom}
                   type="number"
                   name="minMileage"

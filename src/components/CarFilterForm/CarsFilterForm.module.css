@@ -18,7 +18,10 @@
     flex-direction: column;
     width: 204px;
     height: 68px;
+}
 
+.fieldGroup2 {
+    width: 196px;
 }
 
 .fieldDouble {
