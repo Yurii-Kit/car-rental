@@ -41,7 +41,7 @@ const parseNumber = (value) => {
 
 export default function CarsFilterForm({ brands }) {
   const dispatch = useDispatch();
-  const filters = useSelector(selectFilterState);
+  // const filters = useSelector(selectFilterState);
   const fieldId = useId();
 
   const brandOptions = (brands || []).map((b) => ({ value: b, label: b }));
@@ -50,21 +50,38 @@ export default function CarsFilterForm({ brands }) {
     return { value, label: `${value}` };
   });
 
-  const handleSubmit = (values, action) => {
+  // const handleSubmit = (values, actions) => {
+  //   console.log(values);
+  //   dispatch(setFilter(values));
+  //   dispatch(fetchFilteredCars({ page: 1, limit: 12, ...values }));
+  //   actions.resetForm();
+  // };
+
+  const handleSubmit = (values, actions) => {
     console.log(values);
+
+    // Зберігаємо фільтри в Redux (для пагінації)
     dispatch(setFilter(values));
     dispatch(fetchFilteredCars({ page: 1, limit: 12, ...values }));
-    action.resetForm();
+
+    // Скидаємо форму, але "початкові значення" лишаються такими, які зараз у Redux
+    actions.resetForm({
+      values: {
+        brand: '',
+        rentalPrice: '',
+        minMileage: '',
+        maxMileage: '',
+      },
+    });
   };
 
   return (
     <Formik
-      // enableReinitialize
       initialValues={{
-        brand: filters.brand || '',
-        rentalPrice: filters.rentalPrice || '',
-        minMileage: filters.minMileage || '',
-        maxMileage: filters.maxMileage || '',
+        brand: '',
+        rentalPrice: '',
+        minMileage: '',
+        maxMileage: '',
       }}
       onSubmit={handleSubmit}
     >
