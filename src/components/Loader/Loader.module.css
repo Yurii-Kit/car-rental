@@ -1,0 +1,14 @@
+/* Loader.module.css */
+.loaderContainer {
+    display: flex;
+    justify-content: center;
+
+    align-items: flex-start;
+
+    padding-top: 50px;
+
+    width: 100%;
+    min-height: 100vh;
+
+    box-sizing: border-box;
+}

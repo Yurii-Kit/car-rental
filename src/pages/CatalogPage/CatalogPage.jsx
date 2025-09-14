@@ -1,5 +1,6 @@
 // CatalogPage.jsx
 import { useDispatch, useSelector } from 'react-redux';
+import { Loader } from '../../components/Loader/Loader';
 import { fetchCars, fetchFilteredCars } from '../../redux/cars/operations';
 import {
   selectCarsList,
@@ -62,7 +63,7 @@ export default function CatalogPage() {
   if (isLoading) {
     return (
       <Container>
-        <p>Loading car list...</p>
+        <Loader />
       </Container>
     );
   }

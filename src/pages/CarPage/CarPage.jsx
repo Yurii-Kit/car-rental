@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { Loader } from '../../components/Loader/Loader';
 import Container from '../../components/Container/Container';
 import { fetchCarById } from '../../redux/cars/operations';
 import {
@@ -27,7 +28,7 @@ export default function CarPage() {
   if (isLoading) {
     return (
       <Container>
-        <p>Loading car details...</p>
+        <Loader />
       </Container>
     );
   }
