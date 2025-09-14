@@ -11,10 +11,16 @@ const filterSlice = createSlice({
       minMileage: null,
       maxMileage: null,
     },
+    isFiltered: false,
   },
   reducers: {
     setFilter(state, action) {
       state.filters = { ...state.filters, ...action.payload };
+      state.isFiltered =
+        state.filters.brand !== '' ||
+        state.filters.rentalPrice !== '' ||
+        state.filters.minMileage !== '' ||
+        state.filters.maxMileage !== '';
     },
     resetFilters(state) {
       state.filters = {

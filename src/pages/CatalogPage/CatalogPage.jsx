@@ -14,7 +14,11 @@ import css from './CatalogPage.module.css';
 import { useEffect } from 'react';
 import CarsFilterForm from '../../components/CarFilterForm/CarsFilterForm';
 import { fetchBrands } from '../../redux/filters/operations';
-import { selectBrands, selectFilterState } from '../../redux/filters/selectors';
+import {
+  selectBrands,
+  selectFilterState,
+  selectisFiltered,
+} from '../../redux/filters/selectors';
 
 export default function CatalogPage() {
   const dispatch = useDispatch();
@@ -25,13 +29,15 @@ export default function CatalogPage() {
   const brands = useSelector(selectBrands);
   const filters = useSelector(selectFilterState);
   const error = useSelector(selectErrorState);
+  const isFiltered = useSelector(selectisFiltered);
 
   useEffect(() => {
+    // Завантажуємо бренди, якщо вони ще не підвантажені
     if (!brands.length) {
       dispatch(fetchBrands());
     }
-
-    if (!cars.length) {
+    // Завантажуємо всі авто лише якщо список порожній і фільтри не застосовані
+    if (!cars.length && !isFiltered) {
       dispatch(
         fetchCars({
           page: 1,
@@ -39,7 +45,7 @@ export default function CatalogPage() {
         }),
       );
     }
-  }, [dispatch, cars.length, brands.length]);
+  }, [dispatch, cars.length, brands.length, isFiltered]);
 
   const handleLoadMore = () => {
     if (page < totalPages) {
@@ -72,8 +78,12 @@ export default function CatalogPage() {
   return (
     <Container className={css.container}>
       <CarsFilterForm brands={brands} />
-      <CarsList cars={cars} />
-      {page < totalPages && (
+      {cars.length === 0 && isFiltered ? (
+        <p className={css.noCarsMessage}>No cars found for your filters 😢</p>
+      ) : (
+        <CarsList cars={cars} />
+      )}
+      {cars.length > 0 && page < totalPages && (
         <button
           className={css.loadMoreBtn}
           onClick={handleLoadMore}
