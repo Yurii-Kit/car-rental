@@ -82,7 +82,7 @@ export default function CatalogPage() {
       {cars.length === 0 && isFiltered ? (
         <p className={css.noCarsMessage}>No cars found for your filters 😢</p>
       ) : (
-        <CarsList cars={cars} />
+        <CarsList cars={cars} page={page} limit={12} />
       )}
       {cars.length > 0 && page < totalPages && (
         <button
