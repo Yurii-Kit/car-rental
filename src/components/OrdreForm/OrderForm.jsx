@@ -92,6 +92,7 @@ export default function OrderForm({ onSubmit }) {
               calendarClassName={css.myCalendar}
               dateFormat="yyyy-MM-dd"
               locale="enMonday" // використовуємо кастомну локаль
+              minDate={new Date()} // ❗ забороняє минулі дати
             />
             <ErrorMessage
               name="date"

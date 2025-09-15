@@ -1,9 +1,8 @@
 // CarsFilterForm.jsx
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import { setFilter } from '../../redux/filters/slice';
 import { fetchFilteredCars } from '../../redux/cars/operations';
-import { selectFilterState } from '../../redux/filters/selectors';
 import { customStyles } from './CustomsStylesForm';
 import css from './CarsFilterForm.module.css';
 import Select, { components } from 'react-select';
@@ -49,13 +48,6 @@ export default function CarsFilterForm({ brands }) {
     const value = (i + 1) * 10;
     return { value, label: `${value}` };
   });
-
-  // const handleSubmit = (values, actions) => {
-  //   console.log(values);
-  //   dispatch(setFilter(values));
-  //   dispatch(fetchFilteredCars({ page: 1, limit: 12, ...values }));
-  //   actions.resetForm();
-  // };
 
   const handleSubmit = (values, actions) => {
     console.log(values);
@@ -141,7 +133,8 @@ export default function CarsFilterForm({ brands }) {
                       type="text"
                       value={formatNumber(field.value)}
                       onChange={(e) => {
-                        const rawValue = parseNumber(e.target.value);
+                        // залишаємо тільки цифри
+                        const rawValue = e.target.value.replace(/\D/g, '');
                         form.setFieldValue('minMileage', rawValue);
                       }}
                       aria-label="Mileage from"
@@ -159,7 +152,8 @@ export default function CarsFilterForm({ brands }) {
                       type="text"
                       value={formatNumber(field.value)}
                       onChange={(e) => {
-                        const rawValue = parseNumber(e.target.value);
+                        // залишаємо тільки цифри
+                        const rawValue = e.target.value.replace(/\D/g, '');
                         form.setFieldValue('maxMileage', rawValue);
                       }}
                       aria-label="Mileage to"

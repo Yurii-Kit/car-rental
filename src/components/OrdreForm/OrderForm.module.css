@@ -130,6 +130,12 @@
     border-radius: 50%;
 }
 
+:global(.react-datepicker__day--today) {
+    font-weight: 600;
+    border: 1px solid var(--main);
+
+}
+
 :global(.react-datepicker__navigation-icon::before) {
     border-color: var(--button);
     border-style: solid;
@@ -196,4 +202,8 @@
 
 :global(.react-datepicker__day--outside-month) {
     color: var(--gray);
+
+    &:hover {
+        color: var(--main);
+    }
 }
