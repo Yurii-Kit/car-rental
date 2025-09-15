@@ -15,13 +15,8 @@ export default function CarCard({ car }) {
   const handleFavorite = () => {
     if (isFavorite) {
       dispatch(removeFavorite(car.id));
-      localStorage.setItem(
-        'favorites',
-        JSON.stringify(favorites.filter((id) => id !== car.id)),
-      );
     } else {
       dispatch(addFavorite(car.id));
-      localStorage.setItem('favorites', JSON.stringify([...favorites, car.id]));
     }
   };
 

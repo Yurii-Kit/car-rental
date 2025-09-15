@@ -60,7 +60,8 @@ export default function CatalogPage() {
     }
   };
 
-  if (isLoading) {
+  // початкове завантаження
+  if (isLoading && cars.length === 0) {
     return (
       <Container>
         <Loader />

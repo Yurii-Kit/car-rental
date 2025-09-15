@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCars, fetchFilteredCars, fetchCarById } from './operations';
 
-const initialFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-
 const carsSlice = createSlice({
   name: 'cars',
   initialState: {
     list: [], // список машин
     selectedCar: null, //вибране авто
-    favorites: initialFavorites, // обрані авто
+    favorites: [], // обрані авто
     totalCars: null, // загальна кількість авто
     page: 1, // поточна сторінка
     totalPages: null, // всього сторінок
@@ -51,7 +49,7 @@ const carsSlice = createSlice({
       })
       .addCase(fetchCars.rejected, (state) => {
         state.isLoading = false;
-        state.state.error = true;
+        state.error = true;
       })
 
       .addCase(fetchFilteredCars.pending, (state) => {
