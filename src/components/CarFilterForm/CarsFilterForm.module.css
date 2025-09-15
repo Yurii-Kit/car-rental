@@ -49,9 +49,6 @@ input[type=number]::-webkit-inner-spin-button {
     height: auto;
 }
 
-.formWrapper input::placeholder {
-    color: var(--main)
-}
 
 .inputWrapper {
     width: 50%;
@@ -68,6 +65,7 @@ input[type=number]::-webkit-inner-spin-button {
     font-weight: 500;
     font-size: 16px;
     line-height: 1.25;
+    color: var(--main);
 
 }
 
@@ -81,6 +79,7 @@ input[type=number]::-webkit-inner-spin-button {
     font-weight: 500;
     font-size: 16px;
     line-height: 1.25;
+    color: var(--main);
 }
 
 .inputFrom {

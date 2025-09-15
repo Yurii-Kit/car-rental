@@ -6,7 +6,7 @@ export default function CarsList({ cars, page, limit }) {
   const firstNewCarRef = useRef(null);
 
   useEffect(() => {
-    // Скролимо тільки якщо це не перша сторінка
+    //Скролимо тільки якщо це не перша сторінка
     if (page > 1 && firstNewCarRef.current) {
       firstNewCarRef.current.scrollIntoView({
         behavior: 'smooth',
