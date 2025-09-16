@@ -11,7 +11,7 @@
     justify-content: center;
     flex-direction: row;
     gap: 0px;
-
+    width: 157px;
     border: 1px solid var(--button);
     border-radius: 12px;
     padding: 11px 37px;

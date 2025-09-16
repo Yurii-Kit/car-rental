@@ -60,7 +60,6 @@ export default function CatalogPage() {
     }
   };
 
-  // початкове завантаження
   if (isLoading && cars.length === 0) {
     return (
       <Container>
@@ -80,6 +79,8 @@ export default function CatalogPage() {
   return (
     <Container className={css.container}>
       <CarsFilterForm brands={brands} />
+
+      {isLoading && isFiltered && <Loader />}
       {cars.length === 0 && isFiltered ? (
         <p className={css.noCarsMessage}>No cars found for your filters 😢</p>
       ) : (
@@ -91,7 +92,7 @@ export default function CatalogPage() {
           onClick={handleLoadMore}
           disabled={isLoading}
         >
-          {isLoading ? 'Loading...' : 'Load More'}
+          {isLoading ? <Loader size={20} inline /> : 'Load More'}
         </button>
       )}
     </Container>

@@ -2,13 +2,18 @@
 .loaderContainer {
     display: flex;
     justify-content: center;
-
     align-items: flex-start;
-
     padding-top: 50px;
-
     width: 100%;
     min-height: 100vh;
-
     box-sizing: border-box;
+}
+
+.inlineLoader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    min-height: auto;
+    width: auto;
 }
